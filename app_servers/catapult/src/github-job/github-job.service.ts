@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Cron } from '@nestjs/schedule';
+import { Cron, CronExpression } from '@nestjs/schedule';
 import { Octokit } from '@octokit/rest';
 import { ConfigService } from '@nestjs/config';
 import { CreateGithubJobDto } from './dto/create-github-job.dto';
@@ -14,9 +14,10 @@ export class GithubJobService {
     auth: this.configService.get('GITHUB_AUTH'),
   });
 
-  // TODO: schedule job to pull once, then job for checking for changes
-  // @Cron('45 * * * * *')
-  async getUserRepos() {
+  // TODO: Schedule job to pull once, then job for checking for changes
+  // TODO: Check if DB is empty for initial insert
+  // @Cron(CronExpression.)
+  async initialGithubRepoCronJob() {
     try {
       if (this.octokit) {
         const response = await this.octokit.request('GET /users/{username}/repos', {
@@ -33,9 +34,14 @@ export class GithubJobService {
     }
   }
 
-  create(createGithubJobDto: CreateGithubJobDto) {
-    return 'This action adds a new githubJob';
+  @Cron(CronExpression.EVERY_WEEKEND)
+  async updateDatabse(id: number, updateGithubJobDto: UpdateGithubJobDto) {
+    return `This action updates a #${id} githubJob`;
   }
+  
+  // remove(id: number) {
+  //   return `This action removes a #${id} githubJob`;
+  // }
 
   findAll() {
     return `This action returns all githubJob`;
@@ -43,13 +49,5 @@ export class GithubJobService {
 
   findOne(id: number) {
     return `This action returns a #${id} githubJob`;
-  }
-
-  update(id: number, updateGithubJobDto: UpdateGithubJobDto) {
-    return `This action updates a #${id} githubJob`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} githubJob`;
   }
 }
