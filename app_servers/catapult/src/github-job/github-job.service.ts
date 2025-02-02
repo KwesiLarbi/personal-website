@@ -4,19 +4,30 @@ import { Octokit } from '@octokit/rest';
 import { ConfigService } from '@nestjs/config';
 import { CreateGithubJobDto } from './dto/create-github-job.dto';
 import { UpdateGithubJobDto } from './dto/update-github-job.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { GithubRepo } from './entities/github-job.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class GithubJobService {
-  constructor(private configService: ConfigService) {}
+  private octokit;
+  private readonly logger;
 
-  private readonly logger = new Logger(GithubJobService.name);
-  private octokit = new Octokit({
-    auth: this.configService.get('GITHUB_AUTH'),
-  });
+  constructor(
+    @InjectRepository(GithubRepo)
+    private repo: Repository<GithubRepo>,
+    private configService: ConfigService
+  ) {
+    this.octokit = new Octokit({
+      auth: this.configService.get('GITHUB_AUTH'),
+    });
+
+    this.logger = new Logger(GithubJobService.name);
+  }
 
   // TODO: Schedule job to pull once, then job for checking for changes
   // TODO: Check if DB is empty for initial insert
-  // @Cron(CronExpression.)
+  @Cron(CronExpression.EVERY_10_SECONDS)
   async initialGithubRepoCronJob() {
     try {
       if (this.octokit) {
@@ -28,7 +39,13 @@ export class GithubJobService {
         });
         this.logger.log(response);
       }
-      this.logger.log("AUTH didn't work");
+
+      let count = await this.repo.count()
+      if (count === 0) {
+        this.logger.log(`Count: ${count}`);
+      }
+
+      this.logger.log(`Count: ${count}`)
     } catch (error) {
       this.logger.error(`Error grabbing repo data! ${JSON.stringify(error.response)}`);
     }

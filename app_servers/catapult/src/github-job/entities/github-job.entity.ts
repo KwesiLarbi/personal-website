@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from "typeorm";
 
 @Entity()
-export class GithubJob {
+export class GithubRepo {
     @PrimaryGeneratedColumn('uuid')
     id!: string;
 
