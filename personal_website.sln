@@ -1,0 +1,36 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app_servers", "app_servers", "{7828D32D-DF89-ED1F-08AB-58B32CBA6648}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hangfire", "app_servers\Hangfire\Hangfire.csproj", "{F87CE2CE-C23E-4D97-9D45-7C58F04196A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mailer", "app_servers\Mailer\Mailer.csproj", "{49FC4EAE-0CF5-3F60-84A1-8FCAF71F40C0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F87CE2CE-C23E-4D97-9D45-7C58F04196A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F87CE2CE-C23E-4D97-9D45-7C58F04196A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F87CE2CE-C23E-4D97-9D45-7C58F04196A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F87CE2CE-C23E-4D97-9D45-7C58F04196A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49FC4EAE-0CF5-3F60-84A1-8FCAF71F40C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49FC4EAE-0CF5-3F60-84A1-8FCAF71F40C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49FC4EAE-0CF5-3F60-84A1-8FCAF71F40C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49FC4EAE-0CF5-3F60-84A1-8FCAF71F40C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F87CE2CE-C23E-4D97-9D45-7C58F04196A7} = {7828D32D-DF89-ED1F-08AB-58B32CBA6648}
+		{49FC4EAE-0CF5-3F60-84A1-8FCAF71F40C0} = {7828D32D-DF89-ED1F-08AB-58B32CBA6648}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4B6AA00F-4278-406B-A8C0-3AD608165065}
+	EndGlobalSection
+EndGlobal
