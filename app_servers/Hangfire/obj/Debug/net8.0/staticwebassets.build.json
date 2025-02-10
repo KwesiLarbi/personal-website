@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "xeFLGVxJTwPEQKBponCKQtcpPg8SbQC8OVFhmU22brI=",
+  "Source": "Hangfire",
+  "BasePath": "_content/Hangfire",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

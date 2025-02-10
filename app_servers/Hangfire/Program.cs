@@ -1,12 +1,18 @@
 using Microsoft.EntityFrameworkCore;
-using Hangfire.Models;
+using Hangfire.Models.Jobs.GitRepo;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = "server=localhost;user=root;password=root;database=localhost";
+var serverVersion = ServerVersion.AutoDetect(connectionString);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// builder.Services.AddDbContext<GitRepoContext>(opt =>
+//     opt.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddDbContext<GitRepoContext>(opt => opt.UseMySql(connectionString, serverVersion));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

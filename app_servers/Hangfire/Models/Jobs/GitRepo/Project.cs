@@ -8,11 +8,11 @@ namespace Hangfire.Models.Jobs.GitRepo
     {
         public int Id { get; set; }
         [JsonProperty("name")]
-        public string Title { get; set; }
-        public string Description { get; set; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
         [JsonProperty("html_url")]
-        public string GithubUrl { get; set; }
-        public string Language { get; set; }
+        public string? GithubUrl { get; set; }
+        public string? Language { get; set; }
         public int Forks { get; set; }
         [JsonProperty("stargazers_count")]
         public int Stars { get; set; }
