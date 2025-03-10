@@ -5,9 +5,15 @@ import os
 from flask import Flask
 from requests.auth import HTTPBasicAuth
 from dotenv import load_dotenv
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+app.config.from_object(os.environ['APP_SETTINGS'])
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 load_dotenv()
+
+from models import Repos
 
 """
 Eventual function/process. Will check if database is empty,
@@ -42,3 +48,7 @@ print(repos)
 @app.route('/')
 def home():
     return 'status: <none>'
+
+
+if __name__ == '__main__':
+    app.run()
