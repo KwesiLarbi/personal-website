@@ -3,7 +3,7 @@ import datetime
 from app import db
 from sqlalchemy.dialects.postgresql import JSON
 
-class Repos():
+class Repos(db.Model):
     __tablename__ = 'repos'
 
     id = db.Column(db.Integer, primary_key = True)
