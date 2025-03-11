@@ -23,4 +23,5 @@ setuptools==76.0.0
 SQLAlchemy==2.0.38
 typing_extensions==4.12.2
 urllib3==2.3.0
+uuid==1.30
 Werkzeug==3.1.3

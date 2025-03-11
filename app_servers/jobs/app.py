@@ -4,16 +4,25 @@ from flask import Flask
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from rq import Queue
+from rq.job import Job
+from worker import conn
 
 app = Flask(__name__)
-env_config = os.getenv('APP_SETTINGS', 'config.DevelopmentConfig')
-app.config.from_object(env_config)
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+
+# load environmental variables
 load_dotenv()
 
-from models import Repos
+env_config = os.getenv('APP_SETTINGS', 'config.DevelopmentConfig')
+app.config.from_object(env_config)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
+# set up redis connection and initializing queue
+q = Queue(connection=conn)
+
+from jobs import *
 
 
 @app.route('/')

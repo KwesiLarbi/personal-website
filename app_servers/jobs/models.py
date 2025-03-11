@@ -7,6 +7,7 @@ class Repos(db.Model):
     __tablename__ = 'repos'
 
     id = db.Column(db.Integer, primary_key = True)
+    job_id = db.Column(db.Uuid)
     full_name = db.Column(db.String())
     description = db.Column(db.String())
     forks_count = db.Column(db.Integer)
