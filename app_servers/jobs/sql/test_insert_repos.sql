@@ -1,0 +1,5 @@
+INSERT INTO repos (id, full_name, description, forks_count, stargazers_count, watchers_count, size, language, pushed_at, created_at, updated_at) VALUES (716695510, 'KwesiLarbi/big_server', 'None', 0, 0, 0, 5, 'C', '2023-11-09T17:22:15Z', '2023-11-09T17:14:32Z', '2023-11-09T17:22:18Z');
+
+INSERT INTO repos (id, full_name, description, forks_count, stargazers_count, watchers_count, size, language, pushed_at, created_at, updated_at) VALUES (595698112, 'KwesiLarbi/blog', 'None', 0, 0, 0, 9978, 'GO', '2023-02-07T17:11:13Z', '2023-01-31T16:18:59Z', '2023-01-31T16:22:49Z');
+
+INSERT INTO repos (id, full_name, description, forks_count, stargazers_count, watchers_count, size, language, pushed_at, created_at, updated_at) VALUES (912635304, 'KwesiLarbi/cms_data_pipeline', 'None', 0, 0, 0, 395, 'Python', '2025-01-17T17:46:52Z', '2025-01-06T04:40:56Z', '2025-01-17T17:46:53Z');
