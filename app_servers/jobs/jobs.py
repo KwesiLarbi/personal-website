@@ -26,29 +26,53 @@ def init_get_github_repos():
 
     output = json.loads(results.text)
 
-    for i in output:
-        repo = {
-            'id': i['id'],
-            'job_id': job_id,
-            'full_name': i['full_name'],
-            'description': str(i['description']),
-            'forks_count': i['forks_count'],
-            'stargazers_count': i['stargazers_count'],
-            'watchers_count': i['watchers_count'],
-            'size': i['size'],
-            'language': i['language'],
-            'pushed_at': i['pushed_at'],
-            'created_at': i['created_at'],
-            'updated_at': i['updated_at']
-        }
-        repos_arr.append(repo)
+    # for i in output:
+    #     repos = Repos(
+    #         id=i['id'],
+    #         job_id=job_id,
+    #         full_name=i['full_name'],
+    #         description=str(i['description']),
+    #         forks_count=i['forks_count'],
+    #         stargazers_count=i['stargazers_count'],
+    #     )
+        # repo = {
+        #     'id': i['id'],
+        #     'job_id': job_id,
+        #     'full_name': i['full_name'],
+        #     'description': str(i['description']),
+        #     'forks_count': i['forks_count'],
+        #     'stargazers_count': i['stargazers_count'],
+        #     'watchers_count': i['watchers_count'],
+        #     'size': i['size'],
+        #     'language': i['language'],
+        #     'pushed_at': i['pushed_at'],
+        #     'created_at': i['created_at'],
+        #     'updated_at': i['updated_at']
+        # }
+        # repos_arr.append(repo)
 
     # save results
     try:
-        repos = Repos(repos_arr)
-        db.session.add(repos)
-        db.session.commit()
-        print(repos.job_id)
-        # return repos.job_id
+        # repos = Repos(repos_arr)
+        for i in output:
+            repos = Repos(
+                id=i['id'],
+                job_id=job_id,
+                full_name=i['full_name'],
+                description=str(i['description']),
+                forks_count=i['forks_count'],
+                stargazers_count=i['stargazers_count'],
+                watchers_count=i['watchers_count'],
+                size=i['size'],
+                language=i['language'],
+                pushed_at=i['pushed_at'],
+                created_at=i['created_at'],
+                updated_at=i['updated_at']
+            )
+            db.session.add(repos)
+            db.session.commit()
+            
+        return repos.job_id
     except exc.SQLAlchemyError as e:
-        pass
+        errors.append(f'Could not save results of current job: \n{e}')
+        return {"errors": errors}
