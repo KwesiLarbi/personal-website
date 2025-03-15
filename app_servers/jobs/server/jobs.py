@@ -6,14 +6,14 @@ import uuid
 from requests.auth import HTTPBasicAuth
 from sqlalchemy import exc
 
-from models import *
-from app import db
+from .models import Repos
+from . import db
 
 token = os.getenv('GH_TOKEN')
 url = 'https://api.github.com/user/repos'
 
 def init_get_github_repos():
-    repos_arr = []
+    # repos_arr = []
     errors = []
     job_id = uuid.uuid4()
 

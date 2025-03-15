@@ -1,7 +1,10 @@
 import datetime
 
-from app import db
+# from app import db
 from sqlalchemy.dialects.postgresql import JSON
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
 
 class Repos(db.Model):
     __tablename__ = 'repos'
