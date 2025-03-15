@@ -31,43 +31,47 @@ def create_app():
     with app.app_context():
         db.create_all()
 
-    @app.route('/')
-    def index():
-        from .jobs import init_get_github_repos
+    from . import views
+    app.register_blueprint(views.bp)
 
-        with Connection(redis.from_url(app.config['REDIS_URL'])):
-            q = Queue()
-            job = q.enqueue_call(
-                func=init_get_github_repos, result_ttl=5000
-            )
+    # @app.route('/')
+    # def index():
+    #     from .jobs import init_get_github_repos
 
-        response_obj = {
-            'status': 'success',
-            'data': {
-                'task_id': job.get_id()
-            }
-        }
+    #     with Connection(redis.from_url(app.config['REDIS_URL'])):
+    #         q = Queue()
+    #         # job = q.enqueue_call(
+    #         #     func=init_get_github_repos, result_ttl=5000
+    #         # )
+    #         job = q.enqueue(init_get_github_repos)
 
-        return jsonify(response_obj), 202
+    #     response_obj = {
+    #         'status': 'success',
+    #         'data': {
+    #             'task_id': job.get_id()
+    #         }
+    #     }
+
+    #     return jsonify(response_obj), 202
     
-    @app.route('/jobs/<job_id>', methods = ['GET'])
-    def get_job_status(job_id):
-        with Connection(redis.from_url(app.config['REDIS_URL'])):
-            q = Queue()
-            job = q.fetch_job(job_id)
+    # @app.route('/jobs/<job_id>', methods = ['GET'])
+    # def get_job_status(job_id):
+    #     with Connection(redis.from_url(app.config['REDIS_URL'])):
+    #         q = Queue()
+    #         job = q.fetch_job(job_id)
         
-        if job:
-            response_obj = {
-                'status': 'success',
-                'data': {
-                    'job_id': job.get_id(),
-                    'job_status': job.get_status(),
-                    'job_result': job.result,
-                },
-            }
-        else:
-            response_obj = {'status': 'error'}
+    #     if job:
+    #         response_obj = {
+    #             'status': 'success',
+    #             'data': {
+    #                 'job_id': job.get_id(),
+    #                 'job_status': job.get_status(),
+    #                 'job_result': job.result,
+    #             },
+    #         }
+    #     else:
+    #         response_obj = {'status': 'error'}
 
-        return jsonify(response_obj)
+    #     return jsonify(response_obj)
 
     return app
