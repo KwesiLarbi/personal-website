@@ -14,8 +14,6 @@ def run_worker():
     redis_url = app.config['REDIS_URL']
     conn = redis.from_url(redis_url)
     with Connection(conn):
-        # worker = Worker(list(map(Queue, app.config['QUEUES'])))
-        # worker.work()
         worker = Worker(app.config['QUEUES'])
         worker.work()
 

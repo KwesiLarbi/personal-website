@@ -9,6 +9,10 @@ from sqlalchemy import exc
 from .models import Repos
 from . import db
 
+#########################################
+############# GITHUB JOBS ###############
+#########################################
+
 token = os.getenv('GH_TOKEN')
 url = 'https://api.github.com/user/repos'
 

@@ -11,9 +11,6 @@ bp = Blueprint('main', __name__)
 def run_init_git_task():
     with Connection(redis.from_url(current_app.config['REDIS_URL'])):
         q = Queue()
-        # job = q.enqueue_call(
-        #     func=init_get_github_repos, result_ttl=5000
-        # )
         job = q.enqueue(init_get_github_repos)
 
     response_obj = {
