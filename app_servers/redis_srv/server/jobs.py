@@ -5,6 +5,7 @@ import uuid
 
 from requests.auth import HTTPBasicAuth
 from sqlalchemy import exc
+# from atproto import Client
 
 from .models import Repos
 from . import db
@@ -14,6 +15,8 @@ from . import db
 #########################################
 
 token = os.getenv('GH_TOKEN')
+bsky_handle = os.getenv('BSKY_HANDLE')
+bsky_pw = os.getenv('BSKY_PASSWORD')
 url = 'https://api.github.com/user/repos'
 
 def init_get_github_repos():
@@ -54,3 +57,19 @@ def init_get_github_repos():
     except exc.SQLAlchemyError as e:
         errors.append(f'Could not save results of current job: \n{e}')
         return {"errors": errors}
+    
+
+#########################################
+############# BSKY JOBS #################
+#########################################
+
+# def test_bsky_create_post():
+    #     bsky_handle = os.getenv('BSKY_HANDLE')
+    #     bsky_pw = os.getenv('BSKY_PASSWORD')
+    #     client = Client()
+    #     client.login(bsky_handle, bsky_pw)
+    #     post = client.send_post('Hello world! I posted this via the Python SDK.')
+
+    #     return post.uri
+
+    # test_bsky_create_post()

@@ -3,6 +3,7 @@ import os
 from flask import Flask
 from dotenv import load_dotenv
 from flask_migrate import Migrate
+
 from .models import db
 
 load_dotenv()
