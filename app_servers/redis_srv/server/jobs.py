@@ -5,7 +5,7 @@ import uuid
 
 from requests.auth import HTTPBasicAuth
 from sqlalchemy import exc
-# from atproto import Client
+from atproto import Client
 
 from .models import Repos
 from . import db
@@ -73,3 +73,19 @@ def init_get_github_repos():
     #     return post.uri
 
     # test_bsky_create_post()
+
+# def test_bsky_get_user_feed():
+#     bsky_handle = os.getenv('BSKY_HANDLE')
+#     bsky_pw = os.getenv('BSKY_PASSWORD')
+#     client = Client()
+#     client.login(bsky_handle, bsky_pw)
+#     profile = client.get_profile(actor=bsky_handle)
+#     did = profile.did
+#     data = client.get_author_feed(
+#         actor=did,
+#         filter='posts_and_author_threads',
+#         limit=5,
+#     )
+#     feed = data.feed
+
+#     return feed
